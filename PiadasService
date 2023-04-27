@@ -1,0 +1,52 @@
+import org.apache.commons.io.IOUtils;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.mongodb.core.MongoTemplate;
+
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+
+import java.nio.charset.StandardCharsets;
+
+import java.util.List;
+
+@Service
+
+public class PiadasService {
+
+    
+
+    @Autowired
+
+    private MongoTemplate mongoTemplate;
+
+    
+
+    public void enviarArquivo(String conteudoArquivo) throws IOException {
+
+        List<String> linhas = IOUtils.readLines(IOUtils.toInputStream(conteudoArquivo, StandardCharsets.UTF_8));
+
+        
+
+        for (String linha : linhas) {
+
+            String[] campos = linha.split(";");
+
+            
+
+            Tipo tipo = new Tipo(campos[0], campos[1]);
+
+            Piada piada = new Piada(campos[2], tipo, campos[3], campos[4]);
+
+            
+
+            mongoTemplate.save(piada);
+
+        }
+
+    }
+
+}
+
