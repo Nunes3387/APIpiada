@@ -1,1 +1,29 @@
+import io.swagger.annotations.ApiModel;
 
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "Classe que representa uma piada")
+
+public class Piada {
+
+    @ApiModelProperty(value = "Identificador único da piada")
+
+    private String id;
+
+    @ApiModelProperty(value = "Tipo da piada")
+
+    private Tipo tipo;
+
+    @ApiModelProperty(value = "Descrição da piada")
+
+    private String descricao;
+
+    @ApiModelProperty(value = "Título da piada")
+
+    private String titulo;
+
+    
+
+    //...
+
+}
